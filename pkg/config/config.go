@@ -15,10 +15,13 @@ package config
 
 import (
 	"crypto/tls"
+	"time"
 )
 
 type Config struct {
 	DataDir    string
 	PDEndPoint string
 	TLSConfig  *tls.Config
+
+	CollectionInterval time.Duration
 }

@@ -33,6 +33,7 @@ import (
 	"os/signal"
 	"sync"
 	"syscall"
+	"time"
 
 	"github.com/joho/godotenv"
 	"github.com/pingcap/log"
@@ -97,6 +98,7 @@ func NewCLIConfig() *DashboardCLIConfig {
 		}
 	}
 
+	cfg.CoreConfig.CollectionInterval = time.Minute
 	return cfg
 }
 

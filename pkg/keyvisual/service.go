@@ -64,8 +64,8 @@ type Service struct {
 }
 
 func NewService(ctx context.Context, wg *sync.WaitGroup, cfg *config.Config, provider *region.PDDataProvider) *Service {
-	in := input.NewStatInput(ctx, provider)
-	labelStrategy := decorator.TiDBLabelStrategy(ctx, provider)
+	in := input.NewStatInput(ctx, provider, cfg.CollectionInterval)
+	labelStrategy := decorator.TiDBLabelStrategy(ctx, provider, cfg.CollectionInterval)
 	strategy := matrix.DistanceStrategy(ctx, wg, labelStrategy, 1.0/math.Phi, 15, 50)
 	stat := storage.NewStat(ctx, wg, provider, defaultStatConfig, strategy, in.GetStartTime())
 	return &Service{

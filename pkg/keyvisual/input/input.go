@@ -28,9 +28,9 @@ type StatInput interface {
 	Background(stat *storage.Stat)
 }
 
-func NewStatInput(ctx context.Context, provider *region.PDDataProvider) StatInput {
+func NewStatInput(ctx context.Context, provider *region.PDDataProvider, collectionInterval time.Duration) StatInput {
 	if provider.FileStartTime == 0 && provider.FileEndTime == 0 {
-		return PeriodicInput(ctx, provider.PeriodicGetter)
+		return PeriodicInput(ctx, provider.PeriodicGetter, collectionInterval)
 	}
 	startTime := time.Unix(provider.FileStartTime, 0)
 	endTime := time.Unix(provider.FileEndTime, 0)

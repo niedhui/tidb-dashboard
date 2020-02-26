@@ -37,19 +37,22 @@ type tidbLabelStrategy struct {
 
 	TableMap    sync.Map
 	TidbAddress []string
+
+	CollectionInterval time.Duration
 }
 
 // TiDBLabelStrategy implements the LabelStrategy interface. Get Label Information from TiDB.
-func TiDBLabelStrategy(ctx context.Context, provider *region.PDDataProvider) LabelStrategy {
+func TiDBLabelStrategy(ctx context.Context, provider *region.PDDataProvider, collectionInterval time.Duration) LabelStrategy {
 	s := &tidbLabelStrategy{
-		Ctx:      ctx,
-		Provider: provider,
+		Ctx:                ctx,
+		Provider:           provider,
+		CollectionInterval: collectionInterval,
 	}
 	return s
 }
 
 func (s *tidbLabelStrategy) Background() {
-	ticker := time.NewTicker(time.Minute)
+	ticker := time.NewTicker(s.CollectionInterval)
 	defer ticker.Stop()
 	for {
 		select {

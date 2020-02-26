@@ -25,14 +25,16 @@ import (
 )
 
 type periodicInput struct {
-	Ctx            context.Context
-	PeriodicGetter region.RegionsInfoGenerator
+	Ctx                context.Context
+	PeriodicGetter     region.RegionsInfoGenerator
+	CollectionInterval time.Duration
 }
 
-func PeriodicInput(ctx context.Context, periodicGetter region.RegionsInfoGenerator) StatInput {
+func PeriodicInput(ctx context.Context, periodicGetter region.RegionsInfoGenerator, collectionInterval time.Duration) StatInput {
 	return &periodicInput{
-		Ctx:            ctx,
-		PeriodicGetter: periodicGetter,
+		Ctx:                ctx,
+		PeriodicGetter:     periodicGetter,
+		CollectionInterval: collectionInterval,
 	}
 }
 
@@ -41,7 +43,7 @@ func (input *periodicInput) GetStartTime() time.Time {
 }
 
 func (input *periodicInput) Background(stat *storage.Stat) {
-	ticker := time.NewTicker(time.Minute)
+	ticker := time.NewTicker(input.CollectionInterval)
 	defer ticker.Stop()
 	for {
 		select {
