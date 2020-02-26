@@ -2,11 +2,13 @@ on:
   push:
     branches:
       - master
+      - keyvis-cfg
     paths:
       - 'ui/.github_release_version'
   pull_request:
     branches:
       - master
+      - keyvis-cfg
 
 name: Release UI Assets
 
