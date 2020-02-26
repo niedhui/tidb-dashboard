@@ -12,7 +12,7 @@ type CacheEntry = {
   data: HeatmapData;
 };
 
-const CACHE_EXPRIE_SECS = 60;
+const CACHE_EXPRIE_SECS = 5;
 
 class HeatmapCache {
   cache: CacheEntry[] = [];
