@@ -59,7 +59,7 @@ class HeatmapCache {
   }
 }
 
-const DEFAULT_INTERVAL = 60000;
+const DEFAULT_INTERVAL = 5000;
 
 // Todo: define heatmap state, with auto check control, date range select, reset to zoom
 // fetchData ,  changeType, add loading state, change zoom level to reset autofetch,
