@@ -18,7 +18,7 @@ const margin = {
 
 const tooltipSize = {
   width: 255,
-  height: 205
+  height: 245
 }
 
 const tooltipOffset = {
