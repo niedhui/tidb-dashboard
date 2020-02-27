@@ -94,7 +94,7 @@ const KeyVis = props => {
       // _chart = null
       timerId && clearInterval(timerId);
     };
-  }, [isAutoFetch]);
+  }, [isAutoFetch, selection, metricType, dateRange]);
 
   useEffect(() => {
     _fetchHeatmap();
